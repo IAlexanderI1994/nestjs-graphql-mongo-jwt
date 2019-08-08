@@ -9,7 +9,7 @@ export class AppController {
   @Post('login')
   async login (@Request() req) {
     const { body: { ...user } } = req
-    console.log(user)
+
     return this.authService.login(user)
   }
 

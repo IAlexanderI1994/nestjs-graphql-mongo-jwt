@@ -9,7 +9,7 @@ import { jwtConstants } from './constants'
 @Module({
   imports: [
     UsersModule,
-    PassportModule.register({ defaultStrategy: 'jwt' }),
+    PassportModule,
     JwtModule.register({
       secret: jwtConstants.secret,
       signOptions: { expiresIn: '3600s' },
