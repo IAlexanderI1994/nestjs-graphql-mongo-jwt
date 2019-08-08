@@ -4,6 +4,8 @@ import { AppService } from './app.service'
 import { GraphQLModule } from '@nestjs/graphql'
 import { CatsModule } from './cats/cats.module'
 import { MongooseModule } from '@nestjs/mongoose'
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -11,7 +13,9 @@ import { MongooseModule } from '@nestjs/mongoose'
       autoSchemaFile: 'schema.gql',
     }),
     MongooseModule.forRoot('mongodb://root:root@localhost:27017/nest?authSource=admin', { useNewUrlParser: true }),
-    CatsModule],
+    CatsModule,
+    AuthModule,
+    UsersModule],
   controllers: [AppController],
   providers: [AppService],
 })
