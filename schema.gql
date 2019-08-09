@@ -18,8 +18,21 @@ type CatTypeDto {
 
 type Mutation {
   createCat(input: CatInput!): CatTypeDto!
+  register(input: UserInput!): UserTypeDto!
 }
 
 type Query {
   cats: [CatTypeDto!]!
+  users: [UserTypeDto!]!
+}
+
+input UserInput {
+  email: String!
+  password: String!
+}
+
+type UserTypeDto {
+  id: ID!
+  email: String!
+  password: String!
 }
