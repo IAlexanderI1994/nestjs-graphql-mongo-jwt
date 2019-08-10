@@ -15,8 +15,6 @@ export class AuthResolver {
   @Mutation(() => UserTypeDto)
   async register (@Args('input', new JoiValidationPipe(REGISTER_SCHEMA)) input : RegisterUserInput) {
 
-    return input
-
     return this.authService.register(input)
   }
 
