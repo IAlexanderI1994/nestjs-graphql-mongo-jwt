@@ -29,7 +29,7 @@ type Query {
 input RegisterUserInput {
   email: String!
   password: String!
-  password2: String
+  password2: String!
 }
 
 type UserTypeDto {
