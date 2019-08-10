@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { UsersService } from '../users/users.service'
 import { JwtService } from '@nestjs/jwt'
 import { UserInput } from '../users/inputs/user.input'
+import { RegisterUserInput } from '../users/inputs/register-user.input'
 import { User } from '../users/interfaces/user.interface'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
@@ -36,11 +37,11 @@ export class AuthService {
     }
   }
 
-  async register (registerData : UserInput) : Promise<User> {
+  async register (payload : RegisterUserInput) : Promise<User> {
 
-    const { email, password } = registerData
+    const { email, password } = payload
 
-    const createdUser = new this.userModel(registerData)
+    const createdUser = new this.userModel(payload)
     return await createdUser.save()
   }
 }

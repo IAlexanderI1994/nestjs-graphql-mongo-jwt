@@ -18,7 +18,7 @@ type CatTypeDto {
 
 type Mutation {
   createCat(input: CatInput!): CatTypeDto!
-  register(input: UserInput!): UserTypeDto!
+  register(input: RegisterUserInput!): UserTypeDto!
 }
 
 type Query {
@@ -26,9 +26,10 @@ type Query {
   users: [UserTypeDto!]!
 }
 
-input UserInput {
+input RegisterUserInput {
   email: String!
   password: String!
+  password2: String!
 }
 
 type UserTypeDto {
