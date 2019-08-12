@@ -12,7 +12,7 @@ export class RegisterUserInput {
   @MaxLength(30)
   readonly password : string
 
-  @Field() //{ nullable: true }
+  @Field()
   @MinLength(6)
   @MaxLength(30)
   readonly password2 : string

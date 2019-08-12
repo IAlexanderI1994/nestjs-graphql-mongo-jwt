@@ -3,7 +3,6 @@ import { InjectModel } from '@nestjs/mongoose'
 import { User } from './interfaces/user.interface'
 import { Model } from 'mongoose'
 
-
 export type User = any;
 
 @Injectable()
@@ -14,11 +13,9 @@ export class UsersService {
   async findAll () : Promise<User | undefined> {
     return await this.userModel.find().exec()
   }
-  // todo: сделать функцию поиска отдельного пользователя
-  async findOne (id) : Promise<User | undefined> {
-    return await this.userModel.find().exec()
+
+  async findOne (data) : Promise<User | undefined> {
+    return await this.userModel.findOne(data)
   }
-
-
 
 }
