@@ -8,7 +8,7 @@ export class RegisterValidationPipe implements PipeTransform {
     private readonly usersService : UsersService,
   ) {}
 
-  transform (target : any, metadata : ArgumentMetadata) {
+  async transform (target : any, metadata : ArgumentMetadata) {
 
     const { email, password, password2 } = target
     const errors                         = []
@@ -19,7 +19,8 @@ export class RegisterValidationPipe implements PipeTransform {
       }
     })
 
-    const user = this.usersService.findOne({ email })
+    const user = await this.usersService.findOne({ email })
+
 
     if (user) errors.push({
       target,

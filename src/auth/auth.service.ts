@@ -6,6 +6,7 @@ import { RegisterUserInput } from '../users/inputs/register-user.input'
 import { User } from '../users/interfaces/user.interface'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
+import * as bcrypt from 'bcryptjs'
 
 @Injectable()
 export class AuthService {
@@ -42,6 +43,14 @@ export class AuthService {
     const { email, password } = payload
 
     const createdUser = new this.userModel(payload)
+
+    await new Promise(resolve =>
+      bcrypt.genSalt(10, async (error, salt) => {
+        createdUser.password = await bcrypt.hash(password, salt)
+        resolve()
+      })
+    )
+
     return await createdUser.save()
   }
 }
