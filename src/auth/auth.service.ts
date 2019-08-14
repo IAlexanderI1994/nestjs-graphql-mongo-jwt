@@ -18,11 +18,10 @@ export class AuthService {
     private readonly jwtService : JwtService
   ) {}
 
-
   async login (user : LoginInput) {
 
-
-    const payload = { }
+    const userData = await this.usersService.findOne({ email: user.email })
+    const payload  = { email: userData.email, id: userData._id}
     return {
       access_token: this.jwtService.sign(payload),
     }

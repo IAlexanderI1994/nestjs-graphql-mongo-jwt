@@ -24,9 +24,9 @@ export class LoginValidationPipe implements PipeTransform {
       })
       throw new NotFoundException(errors)
     }
-    const isCompare = await (async () => await bcrypt.compare(password, user.password))()
-    console.log(isCompare)
-    if (!isCompare) {
+    const isCompare = async () => await bcrypt.compare(password, user.password)
+
+    if (!await isCompare()) {
       errors.push({
         target,
         constraints: {
