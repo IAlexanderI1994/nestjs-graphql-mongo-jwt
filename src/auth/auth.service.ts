@@ -7,6 +7,7 @@ import { User } from '../users/interfaces/user.interface'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
 import * as bcrypt from 'bcryptjs'
+import { LoginInput } from '../users/inputs/login.input'
 
 @Injectable()
 export class AuthService {
@@ -17,22 +18,11 @@ export class AuthService {
     private readonly jwtService : JwtService
   ) {}
 
-  async validateUser (username : string, pass : string) : Promise<any> {
-    const user = await this.usersService.findOne(username)
 
-    if (user && user.password === pass) {
-      const { password, ...result } = user
-      return result
-    }
-    return null
-  }
+  async login (user : LoginInput) {
 
-  async login (user : any) {
 
-    const { username, password } = user
-    const userData               = await this.validateUser(username, password)
-    if (!userData) return null
-    const payload = { username: userData.username, sub: userData.userId }
+    const payload = { }
     return {
       access_token: this.jwtService.sign(payload),
     }
@@ -40,7 +30,7 @@ export class AuthService {
 
   async register (payload : RegisterUserInput) : Promise<User> {
 
-    const { email, password } = payload
+    const { password } = payload
 
     const createdUser = new this.userModel(payload)
 

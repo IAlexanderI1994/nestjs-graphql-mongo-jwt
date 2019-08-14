@@ -16,9 +16,15 @@ type CatTypeDto {
   breed: String!
 }
 
+input LoginInput {
+  email: String!
+  password: String!
+}
+
 type Mutation {
   createCat(input: CatInput!): CatTypeDto!
   register(input: RegisterUserInput!): UserTypeDto!
+  login(input: LoginInput!): TokenTypeDto!
 }
 
 type Query {
@@ -30,6 +36,10 @@ input RegisterUserInput {
   email: String!
   password: String!
   password2: String!
+}
+
+type TokenTypeDto {
+  access_token: String!
 }
 
 type UserTypeDto {
