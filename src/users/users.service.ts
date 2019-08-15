@@ -10,12 +10,19 @@ export class UsersService {
 
   constructor (@InjectModel('User') private readonly userModel : Model<User>) {}
 
-  async findAll () : Promise<User | undefined> {
+  async findAll () : Promise<User | null> {
     return await this.userModel.find().exec()
   }
 
-  async findOne (data) : Promise<User | undefined> {
+  async findOne (data) : Promise<User | null> {
     return await this.userModel.findOne(data)
+  }
+
+  async findById (id) : Promise<User | null> {
+
+    const user = await this.userModel.findById(id).exec()
+    console.log(user, id)
+    return user
   }
 
 }
